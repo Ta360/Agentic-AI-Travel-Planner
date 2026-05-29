@@ -1,0 +1,802 @@
+bash
+
+mkdir -p /home/claude/travel-ai-agent/{data,tools,agent,app,utils} && echo "Directory structure created"
+Output
+
+Directory structure created
+
+
+Step 2 :- 
+
+FLIGHTS .JSON
+############################################ Code ################################################################
+[
+  {"flight_id": "F001", "airline": "IndiGo", "flight_no": "6E-201", "source": "Delhi", "destination": "Goa", "departure": "06:00", "arrival": "08:10", "duration_min": 130, "price": 4200, "class": "Economy", "seats_available": 15},
+  {"flight_id": "F002", "airline": "Air India", "flight_no": "AI-852", "source": "Delhi", "destination": "Goa", "departure": "10:30", "arrival": "12:45", "duration_min": 135, "price": 5100, "class": "Economy", "seats_available": 8},
+  {"flight_id": "F003", "airline": "SpiceJet", "flight_no": "SG-109", "source": "Delhi", "destination": "Goa", "departure": "14:00", "arrival": "16:15", "duration_min": 135, "price": 4800, "class": "Economy", "seats_available": 20},
+  {"flight_id": "F004", "airline": "Vistara", "flight_no": "UK-991", "source": "Delhi", "destination": "Goa", "departure": "18:00", "arrival": "20:10", "duration_min": 130, "price": 6300, "class": "Business", "seats_available": 5},
+  {"flight_id": "F005", "airline": "IndiGo", "flight_no": "6E-310", "source": "Mumbai", "destination": "Goa", "departure": "07:30", "arrival": "08:35", "duration_min": 65, "price": 2500, "class": "Economy", "seats_available": 30},
+  {"flight_id": "F006", "airline": "GoAir", "flight_no": "G8-301", "source": "Mumbai", "destination": "Goa", "departure": "11:00", "arrival": "12:05", "duration_min": 65, "price": 2200, "class": "Economy", "seats_available": 12},
+  {"flight_id": "F007", "airline": "Air India", "flight_no": "AI-661", "source": "Bangalore", "destination": "Goa", "departure": "09:00", "arrival": "10:10", "duration_min": 70, "price": 2800, "class": "Economy", "seats_available": 18},
+  {"flight_id": "F008", "airline": "IndiGo", "flight_no": "6E-520", "source": "Bangalore", "destination": "Goa", "departure": "15:30", "arrival": "16:40", "duration_min": 70, "price": 2600, "class": "Economy", "seats_available": 22},
+  {"flight_id": "F009", "airline": "IndiGo", "flight_no": "6E-711", "source": "Delhi", "destination": "Mumbai", "departure": "06:00", "arrival": "08:15", "duration_min": 135, "price": 3800, "class": "Economy", "seats_available": 40},
+  {"flight_id": "F010", "airline": "Vistara", "flight_no": "UK-881", "source": "Delhi", "destination": "Mumbai", "departure": "09:00", "arrival": "11:10", "duration_min": 130, "price": 5500, "class": "Business", "seats_available": 6},
+  {"flight_id": "F011", "airline": "SpiceJet", "flight_no": "SG-201", "source": "Delhi", "destination": "Bangalore", "departure": "07:00", "arrival": "09:45", "duration_min": 165, "price": 4100, "class": "Economy", "seats_available": 14},
+  {"flight_id": "F012", "airline": "Air India", "flight_no": "AI-501", "source": "Kolkata", "destination": "Goa", "departure": "08:00", "arrival": "11:30", "duration_min": 210, "price": 5900, "class": "Economy", "seats_available": 9},
+  {"flight_id": "F013", "airline": "IndiGo", "flight_no": "6E-410", "source": "Hyderabad", "destination": "Goa", "departure": "12:00", "arrival": "13:20", "duration_min": 80, "price": 3100, "class": "Economy", "seats_available": 25},
+  {"flight_id": "F014", "airline": "GoAir", "flight_no": "G8-510", "source": "Chennai", "destination": "Goa", "departure": "10:00", "arrival": "11:25", "duration_min": 85, "price": 3300, "class": "Economy", "seats_available": 17},
+  {"flight_id": "F015", "airline": "Vistara", "flight_no": "UK-221", "source": "Delhi", "destination": "Manali", "departure": "06:30", "arrival": "07:45", "duration_min": 75, "price": 3600, "class": "Economy", "seats_available": 11}
+]
+STEP 3 :- 
+Hotels. JSON 
+############################################################ Code ####################################################################################
+[
+  {"hotel_id": "H001", "name": "Sea View Resort", "city": "Goa", "area": "Baga Beach", "stars": 4, "price_per_night": 3200, "rating": 4.5, "amenities": ["Pool", "WiFi", "Spa", "Restaurant", "Bar"], "rooms_available": 5},
+  {"hotel_id": "H002", "name": "The Leela Goa", "city": "Goa", "area": "Cavelossim Beach", "stars": 5, "price_per_night": 8500, "rating": 4.8, "amenities": ["Private Beach", "Pool", "Spa", "Fine Dining", "Gym"], "rooms_available": 3},
+  {"hotel_id": "H003", "name": "Acron Waterfront Resort", "city": "Goa", "area": "Baga", "stars": 4, "price_per_night": 4100, "rating": 4.3, "amenities": ["Riverside Pool", "WiFi", "Restaurant", "Bar"], "rooms_available": 8},
+  {"hotel_id": "H004", "name": "Treebo Trend Casa", "city": "Goa", "area": "Candolim", "stars": 3, "price_per_night": 1800, "rating": 4.0, "amenities": ["WiFi", "Parking", "Room Service"], "rooms_available": 12},
+  {"hotel_id": "H005", "name": "Taj Holiday Village", "city": "Goa", "area": "Sinquerim", "stars": 5, "price_per_night": 9200, "rating": 4.9, "amenities": ["Beach", "Multiple Pools", "Spa", "Cuisine", "Tennis"], "rooms_available": 2},
+  {"hotel_id": "H006", "name": "Zostel Goa", "city": "Goa", "area": "Anjuna", "stars": 2, "price_per_night": 800, "rating": 4.2, "amenities": ["WiFi", "Common Kitchen", "Events", "Dorm & Private"], "rooms_available": 20},
+  {"hotel_id": "H007", "name": "The Oberoi Mumbai", "city": "Mumbai", "area": "Nariman Point", "stars": 5, "price_per_night": 12000, "rating": 4.9, "amenities": ["Sea View", "Spa", "Fine Dining", "Pool", "Gym"], "rooms_available": 4},
+  {"hotel_id": "H008", "name": "Trident BKC", "city": "Mumbai", "area": "Bandra-Kurla Complex", "stars": 5, "price_per_night": 7800, "rating": 4.6, "amenities": ["Pool", "WiFi", "Business Center", "Restaurant"], "rooms_available": 7},
+  {"hotel_id": "H009", "name": "Juhu Residency", "city": "Mumbai", "area": "Juhu", "stars": 3, "price_per_night": 2800, "rating": 3.9, "amenities": ["WiFi", "Restaurant", "Parking"], "rooms_available": 15},
+  {"hotel_id": "H010", "name": "The Lalit New Delhi", "city": "Delhi", "area": "Connaught Place", "stars": 5, "price_per_night": 9000, "rating": 4.7, "amenities": ["Pool", "Spa", "Multiple Restaurants", "Gym", "Bar"], "rooms_available": 6},
+  {"hotel_id": "H011", "name": "Hotel Bloomrooms", "city": "Delhi", "area": "New Delhi Railway", "stars": 3, "price_per_night": 2200, "rating": 4.1, "amenities": ["WiFi", "Cafe", "Parking"], "rooms_available": 18},
+  {"hotel_id": "H012", "name": "ITC Gardenia", "city": "Bangalore", "area": "Residency Road", "stars": 5, "price_per_night": 8200, "rating": 4.8, "amenities": ["Pool", "Spa", "Fine Dining", "Gym", "Business Center"], "rooms_available": 5},
+  {"hotel_id": "H013", "name": "Ginger Bangalore", "city": "Bangalore", "area": "Yeshwanthpur", "stars": 3, "price_per_night": 2100, "rating": 3.8, "amenities": ["WiFi", "Restaurant", "Gym"], "rooms_available": 22},
+  {"hotel_id": "H014", "name": "Snow Valley Resorts", "city": "Manali", "area": "Old Manali", "stars": 4, "price_per_night": 4500, "rating": 4.4, "amenities": ["Mountain View", "Bonfire", "Restaurant", "WiFi"], "rooms_available": 9},
+  {"hotel_id": "H015", "name": "Zostel Manali", "city": "Manali", "area": "Old Manali", "stars": 2, "price_per_night": 700, "rating": 4.3, "amenities": ["WiFi", "Common Area", "Events", "Mountain View"], "rooms_available": 25}
+]
+
+Step 4 :- 
+Sample Places .JSON Dataset 
+
+[
+  {"place_id": "P001", "name": "Baga Beach", "city": "Goa", "type": "Beach", "rating": 4.5, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 3, "description": "Popular beach with water sports, shacks, and vibrant nightlife."},
+  {"place_id": "P002", "name": "Basilica of Bom Jesus", "city": "Goa", "type": "Heritage", "rating": 4.7, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 1, "description": "UNESCO World Heritage Site housing the remains of St. Francis Xavier."},
+  {"place_id": "P003", "name": "Calangute Beach", "city": "Goa", "type": "Beach", "rating": 4.3, "entry_fee": 0, "best_time": "Evening", "duration_hrs": 3, "description": "Largest beach in Goa, known as the Queen of Beaches."},
+  {"place_id": "P004", "name": "Dudhsagar Waterfall", "city": "Goa", "type": "Nature", "rating": 4.8, "entry_fee": 400, "best_time": "Morning", "duration_hrs": 5, "description": "Majestic 4-tiered waterfall on the Goa-Karnataka border."},
+  {"place_id": "P005", "name": "Fort Aguada", "city": "Goa", "type": "Historical", "rating": 4.4, "entry_fee": 50, "best_time": "Afternoon", "duration_hrs": 2, "description": "17th-century Portuguese fort with a lighthouse and panoramic sea views."},
+  {"place_id": "P006", "name": "Anjuna Flea Market", "city": "Goa", "type": "Shopping", "rating": 4.2, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 2, "description": "Famous Wednesday market with clothes, jewelry, handicrafts, and spices."},
+  {"place_id": "P007", "name": "Spice Plantation Tour", "city": "Goa", "type": "Experience", "rating": 4.6, "entry_fee": 500, "best_time": "Morning", "duration_hrs": 3, "description": "Guided tour of spice farms with traditional Goan lunch included."},
+  {"place_id": "P008", "name": "Gateway of India", "city": "Mumbai", "type": "Landmark", "rating": 4.6, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 1, "description": "Iconic 20th-century monument overlooking the Arabian Sea."},
+  {"place_id": "P009", "name": "Marine Drive", "city": "Mumbai", "type": "Promenade", "rating": 4.7, "entry_fee": 0, "best_time": "Evening", "duration_hrs": 2, "description": "3.6 km long boulevard along the sea, perfect for evening strolls."},
+  {"place_id": "P010", "name": "Elephanta Caves", "city": "Mumbai", "type": "Heritage", "rating": 4.5, "entry_fee": 600, "best_time": "Morning", "duration_hrs": 4, "description": "UNESCO World Heritage rock-cut cave temples dedicated to Lord Shiva."},
+  {"place_id": "P011", "name": "India Gate", "city": "Delhi", "type": "Landmark", "rating": 4.6, "entry_fee": 0, "best_time": "Evening", "duration_hrs": 1, "description": "War memorial and iconic landmark in the heart of New Delhi."},
+  {"place_id": "P012", "name": "Red Fort", "city": "Delhi", "type": "Historical", "rating": 4.5, "entry_fee": 650, "best_time": "Morning", "duration_hrs": 2, "description": "UNESCO World Heritage Site, the historic fort of Mughal emperors."},
+  {"place_id": "P013", "name": "Qutub Minar", "city": "Delhi", "type": "Historical", "rating": 4.6, "entry_fee": 650, "best_time": "Morning", "duration_hrs": 2, "description": "UNESCO World Heritage Site and the tallest brick minaret in the world."},
+  {"place_id": "P014", "name": "Solang Valley", "city": "Manali", "type": "Adventure", "rating": 4.7, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 5, "description": "Adventure hub for skiing, zorbing, paragliding, and cable cars."},
+  {"place_id": "P015", "name": "Rohtang Pass", "city": "Manali", "type": "Nature", "rating": 4.8, "entry_fee": 550, "best_time": "Morning", "duration_hrs": 6, "description": "High mountain pass with breathtaking Himalayan views and snow activities."},
+  {"place_id": "P016", "name": "Hadimba Temple", "city": "Manali", "type": "Religious", "rating": 4.5, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 1, "description": "Ancient cave temple nestled in a cedar forest, dedicated to Goddess Hadimba."},
+  {"place_id": "P017", "name": "Old Manali", "city": "Manali", "type": "Cultural", "rating": 4.4, "entry_fee": 0, "best_time": "Afternoon", "duration_hrs": 3, "description": "Charming village with cafes, local shops, and a relaxed hippie vibe."},
+  {"place_id": "P018", "name": "Cubbon Park", "city": "Bangalore", "type": "Nature", "rating": 4.5, "entry_fee": 0, "best_time": "Morning", "duration_hrs": 2, "description": "300-acre green lung of Bangalore with botanical gardens and walking trails."},
+  {"place_id": "P019", "name": "Bangalore Palace", "city": "Bangalore", "type": "Historical", "rating": 4.3, "entry_fee": 460, "best_time": "Morning", "duration_hrs": 2, "description": "Tudor-style palace with impressive architecture and royal artifacts."},
+  {"place_id": "P020", "name": "Lalbagh Botanical Garden", "city": "Bangalore", "type": "Nature", "rating": 4.6, "entry_fee": 20, "best_time": "Morning", "duration_hrs": 2, "description": "Historic botanical garden with a glass house and hundreds of rare plant species."}
+]
+
+Step 5 :- 
+
+FLIGHT TOOL.PY
+################################################### Source Code ###########################################################################
+
+
+"""
+Flight Search Tool for LangChain Agent.
+Reads flights.json and returns filtered, ranked flight options.
+"""
+
+import json
+import os
+from langchain.tools import tool
+
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "flights.json")
+
+
+def _load_flights() -> list[dict]:
+    """Load flights data from JSON file."""
+    with open(DATA_PATH, "r") as f:
+        return json.load(f)
+
+
+@tool
+def flight_search_tool(source: str, destination: str, preference: str = "cheapest") -> str:
+    """
+    Search for available flights between two cities.
+
+    Args:
+        source (str): Departure city name (e.g., 'Delhi', 'Mumbai').
+        destination (str): Arrival city name (e.g., 'Goa', 'Bangalore').
+        preference (str): Sorting preference — 'cheapest' or 'fastest'. Default is 'cheapest'.
+
+    Returns:
+        str: Formatted string listing top flight options with details.
+    """
+    try:
+        flights = _load_flights()
+
+        # Filter flights by source and destination (case-insensitive)
+        matched = [
+            f for f in flights
+            if f["source"].lower() == source.lower()
+            and f["destination"].lower() == destination.lower()
+        ]
+
+        if not matched:
+            return (
+                f"No flights found from {source} to {destination}. "
+                "Please check city names or try alternate routes."
+            )
+
+        # Sort based on preference
+        if preference.lower() == "fastest":
+            matched.sort(key=lambda x: x["duration_min"])
+        else:
+            matched.sort(key=lambda x: x["price"])
+
+        # Build response string
+        lines = [f"  Available Flights: {source} → {destination}\n"]
+        for i, f in enumerate(matched[:5], 1):
+            lines.append(
+                f"{i}. {f['airline']} ({f['flight_no']}) | "
+                f"Dep: {f['departure']} → Arr: {f['arrival']} | "
+                f"Duration: {f['duration_min']} min | "
+                f"₹{f['price']:,} ({f['class']}) | "
+                f"Seats: {f['seats_available']}"
+            )
+
+        top = matched[0]
+        lines.append(
+            f"\n Recommended ({preference}): {top['airline']} ({top['flight_no']}) "
+            f"at ₹{top['price']:,}, departing {top['departure']}."
+        )
+        return "\n".join(lines)
+
+    except FileNotFoundError:
+        return "Error: flights.json data file not found. Please check the data directory."
+    except Exception as e:
+        return f"Error searching flights: {str(e)}"
+
+STEP 6 :- 
+HOTEL TOOL. PY 
+##################################################### Source Code ########################################################################################
+"""
+Hotel Recommendation Tool for LangChain Agent.
+Reads hotels.json and returns filtered, ranked hotel suggestions.
+"""
+
+import json
+import os
+from langchain.tools import tool
+
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "hotels.json")
+
+
+def _load_hotels() -> list[dict]:
+    """Load hotels data from JSON file."""
+    with open(DATA_PATH, "r") as f:
+        return json.load(f)
+
+
+@tool
+def hotel_recommendation_tool(
+    city: str,
+    budget_per_night: int = 10000,
+    min_rating: float = 3.5,
+    preference: str = "best_rated"
+) -> str:
+    """
+    Search and recommend hotels in a given city based on budget and rating filters.
+
+    Args:
+        city (str): Target city name (e.g., 'Goa', 'Mumbai', 'Delhi').
+        budget_per_night (int): Maximum price per night in INR. Default is 10000.
+        min_rating (float): Minimum acceptable rating (out of 5). Default is 3.5.
+        preference (str): 'best_rated' or 'cheapest'. Default is 'best_rated'.
+
+    Returns:
+        str: Formatted string listing top hotel recommendations.
+    """
+    try:
+        hotels = _load_hotels()
+
+        # Filter by city, budget, and rating
+        matched = [
+            h for h in hotels
+            if h["city"].lower() == city.lower()
+            and h["price_per_night"] <= budget_per_night
+            and h["rating"] >= min_rating
+        ]
+
+        if not matched:
+            return (
+                f"No hotels found in {city} within ₹{budget_per_night:,}/night "
+                f"with rating ≥ {min_rating}. Consider increasing your budget or relaxing filters."
+            )
+
+        # Sort based on preference
+        if preference.lower() == "cheapest":
+            matched.sort(key=lambda x: x["price_per_night"])
+        else:
+            matched.sort(key=lambda x: x["rating"], reverse=True)
+
+        # Build response
+        lines = [f"  Hotel Recommendations in {city}:\n"]
+        for i, h in enumerate(matched[:4], 1):
+            amenities = ", ".join(h["amenities"][:4])
+            lines.append(
+                f"{i}. {h['name']} {h['stars']}-star | {h['area']} | "
+                f"₹{h['price_per_night']:,}/night | Rating: {h['rating']}/5 | "
+                f"Amenities: {amenities} | Rooms: {h['rooms_available']}"
+            )
+
+        top = matched[0]
+        lines.append(
+            f"\n Recommended: {top['name']} ({top['stars']}-star) in {top['area']} "
+            f"at ₹{top['price_per_night']:,}/night — Rating: {top['rating']}/5."
+        )
+        return "\n".join(lines)
+
+    except FileNotFoundError:
+        return "Error: hotels.json data file not found. Please check the data directory."
+    except Exception as e:
+        return f"Error searching hotels: {str(e)}"
+
+Step 7 :- 
+Places Tool.PY
+########################################################### Source Code ##########################################################################
+"""
+Places Discovery Tool for LangChain Agent.
+Reads places.json and recommends attractions based on city and type filters.
+"""
+
+import json
+import os
+from langchain.tools import tool
+
+DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "places.json")
+
+
+def _load_places() -> list[dict]:
+    """Load places data from JSON file."""
+    with open(DATA_PATH, "r") as f:
+        return json.load(f)
+
+
+@tool
+def places_discovery_tool(
+    city: str,
+    place_type: str = "all",
+    top_n: int = 5
+) -> str:
+    """
+    Discover top tourist attractions and places of interest in a city.
+
+    Args:
+        city (str): Target city name (e.g., 'Goa', 'Delhi', 'Manali').
+        place_type (str): Category filter — 'Beach', 'Heritage', 'Nature', 'Adventure',
+                          'Historical', 'Shopping', 'Religious', 'Cultural', 'Landmark',
+                          'Promenade', 'Experience', or 'all'. Default is 'all'.
+        top_n (int): Number of top places to return. Default is 5.
+
+    Returns:
+        str: Formatted list of recommended places with details.
+    """
+    try:
+        places = _load_places()
+
+        # Filter by city
+        city_places = [p for p in places if p["city"].lower() == city.lower()]
+
+        if not city_places:
+            return f"No places found for {city}. Please check the city name."
+
+        # Filter by type if specified
+        if place_type.lower() != "all":
+            filtered = [
+                p for p in city_places
+                if p["type"].lower() == place_type.lower()
+            ]
+            if not filtered:
+                filtered = city_places  # fall back to all places in city
+        else:
+            filtered = city_places
+
+        # Sort by rating descending
+        filtered.sort(key=lambda x: x["rating"], reverse=True)
+
+        # Build response
+        lines = [f"  Top Places to Visit in {city}:\n"]
+        for i, p in enumerate(filtered[:top_n], 1):
+            fee = f"₹{p['entry_fee']}" if p["entry_fee"] > 0 else "Free Entry"
+            lines.append(
+                f"{i}. {p['name']} [{p['type']}] | Rating: {p['rating']}/5 | "
+                f"Entry: {fee} | Best Time: {p['best_time']} | "
+                f"Duration: ~{p['duration_hrs']} hrs\n"
+                f"    {p['description']}"
+            )
+
+        return "\n\n".join(lines)
+
+    except FileNotFoundError:
+        return "Error: places.json data file not found. Please check the data directory."
+    except Exception as e:
+        return f"Error discovering places: {str(e)}"
+
+Step 8 :- 
+Weather Tool.PY 
+#################################################################### Source Code ##############################################################################
+"""
+Weather Lookup Tool for LangChain Agent.
+Uses the free Open-Meteo API (no API key required) to fetch travel-date forecasts.
+"""
+
+import requests
+from langchain.tools import tool
+
+# City geocoordinates lookup (extend as needed)
+CITY_COORDS = {
+    "goa": {"lat": 15.2993, "lon": 74.1240, "label": "Goa, India"},
+    "mumbai": {"lat": 19.0760, "lon": 72.8777, "label": "Mumbai, India"},
+    "delhi": {"lat": 28.7041, "lon": 77.1025, "label": "New Delhi, India"},
+    "bangalore": {"lat": 12.9716, "lon": 77.5946, "label": "Bangalore, India"},
+    "manali": {"lat": 32.2432, "lon": 77.1892, "label": "Manali, India"},
+    "jaipur": {"lat": 26.9124, "lon": 75.7873, "label": "Jaipur, India"},
+    "kolkata": {"lat": 22.5726, "lon": 88.3639, "label": "Kolkata, India"},
+    "hyderabad": {"lat": 17.3850, "lon": 78.4867, "label": "Hyderabad, India"},
+    "chennai": {"lat": 13.0827, "lon": 80.2707, "label": "Chennai, India"},
+    "agra": {"lat": 27.1767, "lon": 78.0081, "label": "Agra, India"},
+}
+
+WMO_CODES = {
+    0: "Clear Sky ",
+    1: "Mainly Clear ",
+    2: "Partly Cloudy ",
+    3: "Overcast ",
+    45: "Foggy ",
+    48: "Icy Fog ",
+    51: "Light Drizzle ",
+    53: "Moderate Drizzle ",
+    61: "Slight Rain ",
+    63: "Moderate Rain ",
+    65: "Heavy Rain ",
+    71: "Slight Snowfall ",
+    73: "Moderate Snowfall ",
+    75: "Heavy Snowfall ",
+    80: "Slight Rain Showers ",
+    81: "Moderate Rain Showers ",
+    95: "Thunderstorm ",
+    99: "Heavy Thunderstorm ",
+}
+
+
+@tool
+def weather_lookup_tool(city: str, num_days: int = 3) -> str:
+    """
+    Fetch a weather forecast for a destination city using the free Open-Meteo API.
+
+    Args:
+        city (str): Destination city name (e.g., 'Goa', 'Mumbai', 'Delhi').
+        num_days (int): Number of forecast days required (1–7). Default is 3.
+
+    Returns:
+        str: Day-wise weather forecast including temperature, condition, and wind.
+    """
+    try:
+        city_key = city.strip().lower()
+        coords = CITY_COORDS.get(city_key)
+
+        if not coords:
+            return (
+                f"Weather data not available for '{city}'. "
+                f"Supported cities: {', '.join(c.title() for c in CITY_COORDS)}."
+            )
+
+        num_days = max(1, min(num_days, 7))  # clamp between 1 and 7
+
+        url = (
+            f"https://api.open-meteo.com/v1/forecast"
+            f"?latitude={coords['lat']}&longitude={coords['lon']}"
+            f"&daily=temperature_2m_max,temperature_2m_min,weathercode,windspeed_10m_max"
+            f"&timezone=auto&forecast_days={num_days}"
+        )
+
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        daily = data.get("daily", {})
+        dates = daily.get("time", [])
+        temp_max = daily.get("temperature_2m_max", [])
+        temp_min = daily.get("temperature_2m_min", [])
+        weather_codes = daily.get("weathercode", [])
+        wind_speed = daily.get("windspeed_10m_max", [])
+
+        lines = [f"  Weather Forecast for {coords['label']} ({num_days} days):\n"]
+        for i in range(len(dates)):
+            condition = WMO_CODES.get(weather_codes[i], "Unknown")
+            lines.append(
+                f" {dates[i]}: {condition} | "
+                f" {temp_min[i]}°C – {temp_max[i]}°C | "
+                f" Wind: {wind_speed[i]} km/h"
+            )
+
+        return "\n".join(lines)
+
+    except requests.exceptions.ConnectionError:
+        return "Unable to reach weather API. Please check your internet connection."
+    except requests.exceptions.Timeout:
+        return "Weather API request timed out. Please try again."
+    except requests.exceptions.HTTPError as e:
+        return f"Weather API error: {str(e)}"
+    except Exception as e:
+        return f"Unexpected error fetching weather: {str(e)}"
+
+Step 9 :- 
+Budget Tool.PY 
+############################################################ Source Code ###################################################################
+"""
+Budget Estimation Tool for LangChain Agent.
+Calculates total trip cost based on flight, hotel, and per-day expenses.
+"""
+
+from langchain.tools import tool
+
+# Average daily expense estimates per city (food + local transport + misc) in INR
+DAILY_EXPENSES = {
+    "goa": 1200,
+    "mumbai": 1500,
+    "delhi": 1000,
+    "bangalore": 1100,
+    "manali": 900,
+    "jaipur": 800,
+    "kolkata": 900,
+    "hyderabad": 950,
+    "chennai": 1000,
+    "agra": 700,
+}
+
+DEFAULT_DAILY_EXPENSE = 1000  # fallback for unknown cities
+
+
+@tool
+def budget_estimation_tool(
+    destination: str,
+    flight_cost: int,
+    hotel_cost_per_night: int,
+    num_days: int,
+    num_people: int = 1
+) -> str:
+    """
+    Estimate the total cost for a trip including flights, hotel, and daily expenses.
+
+    Args:
+        destination (str): Destination city name (e.g., 'Goa', 'Manali').
+        flight_cost (int): One-way flight cost per person in INR.
+        hotel_cost_per_night (int): Hotel cost per night in INR.
+        num_days (int): Duration of trip in days.
+        num_people (int): Number of travellers. Default is 1.
+
+    Returns:
+        str: Detailed budget breakdown and total estimated cost.
+    """
+    try:
+        num_days = max(1, num_days)
+        num_people = max(1, num_people)
+
+        daily_rate = DAILY_EXPENSES.get(destination.lower(), DEFAULT_DAILY_EXPENSE)
+
+        # Cost calculations
+        total_flight = flight_cost * num_people * 2  # round-trip for all people
+        total_hotel = hotel_cost_per_night * num_days
+        total_daily = daily_rate * num_days * num_people
+        grand_total = total_flight + total_hotel + total_daily
+
+        per_person_total = grand_total / num_people
+
+        lines = [
+            f" Budget Breakdown — {destination.title()} Trip ({num_days} Days, {num_people} Person(s)):\n",
+            f"  Flights (Round-Trip × {num_people}):  ₹{total_flight:,}",
+            f"   └─ ₹{flight_cost:,}/person × {num_people} × 2 (return)",
+            f"  Hotel ({num_days} nights):             ₹{total_hotel:,}",
+            f"   └─ ₹{hotel_cost_per_night:,}/night × {num_days} nights",
+            f"  Food & Local Travel:              ₹{total_daily:,}",
+            f"   └─ ≈₹{daily_rate:,}/day × {num_days} days × {num_people} person(s)",
+            f"\n{'─' * 45}",
+            f" TOTAL ESTIMATED COST:             ₹{grand_total:,}",
+        ]
+
+        if num_people > 1:
+            lines.append(f"  Per Person Cost:                  ₹{per_person_total:,.0f}")
+
+        lines.append(
+            "\n  Note: Costs are estimates. Entry fees for attractions, "
+            "shopping, and premium dining are not included."
+        )
+
+        return "\n".join(lines)
+
+    except Exception as e:
+        return f"Error estimating budget: {str(e)}"
+
+Step 10 :- 
+INIT.PY 
+############################################################################## Source Code ##################################################################
+"""
+Tools package for AI Travel Planning Agent.
+Exposes all LangChain tools used by the agent.
+"""
+
+from tools.flight_tool import flight_search_tool
+from tools.hotel_tool import hotel_recommendation_tool
+from tools.places_tool import places_discovery_tool
+from tools.weather_tool import weather_lookup_tool
+from tools.budget_tool import budget_estimation_tool
+
+ALL_TOOLS = [
+    flight_search_tool,
+    hotel_recommendation_tool,
+    places_discovery_tool,
+    weather_lookup_tool,
+    budget_estimation_tool,
+]
+
+__all__ = [
+    "flight_search_tool",
+    "hotel_recommendation_tool",
+    "places_discovery_tool",
+    "weather_lookup_tool",
+    "budget_estimation_tool",
+    "ALL_TOOLS",
+]
+Step 11 :- 
+Travel agent · PY
+################################################################## Source Code ########################################################################
+"""
+Travel Planning Agent — LangChain ReAct / Tool-Calling Agent.
+Orchestrates all tools to autonomously produce a complete trip itinerary.
+"""
+
+import os
+from langchain_openai import ChatOpenAI
+from langchain.agents import AgentExecutor, create_openai_tools_agent
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain.schema import SystemMessage
+
+from tools import ALL_TOOLS
+
+# ─── System Prompt ──────────────────────────────────────────────────────────────
+SYSTEM_PROMPT = """You are an expert AI Travel Planning Assistant powered by LangChain.
+
+Your job is to help users plan complete, optimized, personalized trips.
+
+When given a travel query you MUST:
+1. Search for available flights from the source to destination.
+2. Recommend suitable hotels at the destination.
+3. Discover top places and attractions to visit.
+4. Fetch the weather forecast for the travel dates.
+5. Estimate the total budget for the trip.
+6. Synthesize all results into a structured, day-wise itinerary.
+
+Output Format:
+─────────────────────────────────────────────────────────
+🌍  TRIP SUMMARY
+   Destination | Duration | Travel Dates | Travellers
+
+✈️  FLIGHT DETAILS
+   Selected flight with price, timing, and airline
+
+🏨  HOTEL RECOMMENDATION
+   Hotel name, area, rating, price/night
+
+🌤️  WEATHER FORECAST
+   Day-by-day forecast
+
+📅  DAY-WISE ITINERARY
+   Day 1: Morning | Afternoon | Evening
+   Day 2: ...
+
+💰  BUDGET BREAKDOWN
+   Flights | Hotel | Daily Expenses | Total
+
+🤖  REASONING
+   Brief explanation of key choices made
+─────────────────────────────────────────────────────────
+
+Always be helpful, specific, and practical. If a city is not in the dataset,
+gracefully inform the user and suggest alternatives."""
+
+
+def build_agent() -> AgentExecutor:
+    """
+    Build and return a LangChain Tool-Calling AgentExecutor.
+
+    Returns:
+        AgentExecutor: Ready-to-use travel planning agent.
+
+    Raises:
+        EnvironmentError: If OPENAI_API_KEY is not set.
+    """
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise EnvironmentError(
+            "OPENAI_API_KEY environment variable is not set. "
+            "Please add it to your .env file."
+        )
+
+    llm = ChatOpenAI(
+        model="gpt-4o-mini",
+        temperature=0.3,
+        openai_api_key=api_key,
+    )
+
+    prompt = ChatPromptTemplate.from_messages([
+        SystemMessage(content=SYSTEM_PROMPT),
+        MessagesPlaceholder(variable_name="chat_history", optional=True),
+        ("human", "{input}"),
+        MessagesPlaceholder(variable_name="agent_scratchpad"),
+    ])
+
+    agent = create_openai_tools_agent(llm=llm, tools=ALL_TOOLS, prompt=prompt)
+
+    executor = AgentExecutor(
+        agent=agent,
+        tools=ALL_TOOLS,
+        verbose=True,
+        max_iterations=10,
+        handle_parsing_errors=True,
+        return_intermediate_steps=True,
+    )
+
+    return executor
+
+
+def run_agent(query: str) -> dict:
+    """
+    Run the travel agent with a natural language query.
+
+    Args:
+        query (str): User's travel planning request.
+
+    Returns:
+        dict: Contains 'output' (final answer) and 'intermediate_steps'.
+    """
+    agent = build_agent()
+    result = agent.invoke({"input": query})
+    return result
+
+Step 12 :- 
+Agent Init .PY
+############################################################# Source Code #############################################################
+"""Agent package for AI Travel Planning Assistant."""
+
+from agent.travel_agent import build_agent, run_agent
+
+__all__ = ["build_agent", "run_agent"]
+
+Step 13 :- 
+Utility Helpers .PY 
+######################################################### Source Code ########################################################################
+
+"""
+Utility helpers for AI Travel Planning Assistant.
+Provides input validation, formatting, and query parsing.
+"""
+
+import re
+from datetime import datetime, timedelta
+
+
+# ─── Query Parsing ──────────────────────────────────────────────────────────────
+
+KNOWN_CITIES = [
+    "goa", "mumbai", "delhi", "bangalore", "manali",
+    "jaipur", "kolkata", "hyderabad", "chennai", "agra",
+]
+
+
+def extract_cities_from_query(query: str) -> dict:
+    """
+    Attempt to extract source/destination cities from a free-text query.
+
+    Args:
+        query (str): User's natural language travel query.
+
+    Returns:
+        dict: {'source': str or None, 'destination': str or None}
+    """
+    query_lower = query.lower()
+    found = [city for city in KNOWN_CITIES if city in query_lower]
+
+    result = {"source": None, "destination": None}
+
+    # Heuristic: "from X to Y" pattern
+    match = re.search(r"from\s+(\w+)\s+to\s+(\w+)", query_lower)
+    if match:
+        result["source"] = match.group(1).title()
+        result["destination"] = match.group(2).title()
+    elif len(found) >= 2:
+        result["source"] = found[0].title()
+        result["destination"] = found[1].title()
+    elif len(found) == 1:
+        result["destination"] = found[0].title()
+
+    return result
+
+
+def extract_days_from_query(query: str) -> int:
+    """
+    Extract trip duration (in days) from query text.
+
+    Args:
+        query (str): User's natural language travel query.
+
+    Returns:
+        int: Number of days (default 3 if not found).
+    """
+    # Match patterns like "3 days", "5-day", "for a week"
+    match = re.search(r"(\d+)\s*(?:day|days|night|nights)", query.lower())
+    if match:
+        return int(match.group(1))
+    if "week" in query.lower():
+        return 7
+    if "weekend" in query.lower():
+        return 2
+    return 3  # sensible default
+
+
+# ─── Formatting Helpers ─────────────────────────────────────────────────────────
+
+def format_currency(amount: int) -> str:
+    """Format an integer amount as Indian Rupees string."""
+    return f"₹{amount:,}"
+
+
+def get_travel_dates(start_offset_days: int = 7, num_days: int = 3) -> tuple[str, str]:
+    """
+    Generate start and end travel date strings.
+
+    Args:
+        start_offset_days (int): Days from today to start. Default 7.
+        num_days (int): Trip duration. Default 3.
+
+    Returns:
+        tuple[str, str]: (start_date, end_date) as 'YYYY-MM-DD' strings.
+    """
+    start = datetime.today() + timedelta(days=start_offset_days)
+    end = start + timedelta(days=num_days - 1)
+    return start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d")
+
+
+def validate_query(query: str) -> tuple[bool, str]:
+    """
+    Basic validation of the travel query.
+
+    Args:
+        query (str): User input.
+
+    Returns:
+        tuple[bool, str]: (is_valid, error_message)
+    """
+    if not query or len(query.strip()) < 10:
+        return False, "Query too short. Please describe your travel plans in more detail."
+    if len(query) > 1000:
+        return False, "Query too long. Please keep it under 1000 characters."
+    return True, ""
+
+
+# ─── Display Helpers ────────────────────────────────────────────────────────────
+
+def divider(char: str = "─", width: int = 55) -> str:
+    """Return a visual divider line."""
+    return char * width
+
+
+def section_header(title: str) -> str:
+    """Return a formatted section header string."""
+    return f"\n{'─' * 55}\n  {title}\n{'─' * 55}"
+
+
+
+
+
+
